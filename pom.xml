@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.0.0.M5</version>
+    </parent>
+
+    <groupId>eu.michael-simons</groupId>
+    <artifactId>configurable-single-user-spring-boot-demo</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <name>configurable-single-user-spring-boot-demo</name>
+	<description>A super simple Spring Boot Starter for Spring Boot 2.0 that brings back the configurable, single user.</description>
+	<url>https://github.com/michael-simons/configurable-single-user-spring-boot-starter</url>
+    <inceptionYear>2017</inceptionYear>
+    <organization>
+      <name>michael-simons.eu</name>
+      <url>http://michael-simons.eu</url>
+    </organization>
+    <licenses>
+      <license>
+        <name>Apache License, Version 2.0</name>
+        <url>http://www.apache.org/licenses/LICENSE-2.0</url>
+      </license>
+    </licenses>
+	
+    <developers>
+      <developer>
+        <name>Michael J. Simons</name>
+        <email>michael@simons.ac</email>
+      </developer>
+    </developers>
+	
+    <prerequisites>
+      <maven>3.5.0</maven>
+    </prerequisites>
+		
+    <scm>
+      <connection>scm:git:git@github.com:michael-simons/configurable-single-user-spring-boot-starter.git</connection>
+      <developerConnection>scm:git:git@github.com:michael-simons/configurable-single-user-spring-boot-starter.git</developerConnection>
+      <url>https://github.com/michael-simons/configurable-single-user-spring-boot-starter</url>
+      <tag>HEAD</tag>
+    </scm>
+
+    <properties>
+      <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+      <maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
+      <build-date>${maven.build.timestamp}</build-date>
+    </properties>
+
+
+    <!-- DELETE ME -->
+    <repositories>
+        <repository>
+            <id>spring-snapshots</id>
+            <name>Spring Snapshots</name>
+            <url>https://repo.spring.io/snapshot</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>spring-milestones</id>
+            <name>Spring Milestones</name>
+            <url>https://repo.spring.io/milestone</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+    <pluginRepositories>
+        <pluginRepository>
+            <id>spring-snapshots</id>
+            <name>Spring Snapshots</name>
+            <url>https://repo.spring.io/snapshot</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </pluginRepository>
+        <pluginRepository>
+            <id>spring-milestones</id>
+            <name>Spring Milestones</name>
+            <url>https://repo.spring.io/milestone</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </pluginRepository>
+    </pluginRepositories>
+    <!-- DELETE ME -->
+</project>
