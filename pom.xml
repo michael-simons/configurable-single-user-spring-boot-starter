@@ -13,52 +13,51 @@
     <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
 
-    <name>configurable-single-user-spring-boot-parent</name>
-	<description>A super simple Spring Boot Starter for Spring Boot 2.0 that brings back the configurable, single user.</description>
-	<url>https://github.com/michael-simons/configurable-single-user-spring-boot-starter</url>
+    <name>configurable-single-user-spring-boot-starter</name>
+    <description>A super simple Spring Boot Starter for Spring Boot 2.0 that brings back the configurable, single user.</description>
+    <url>https://github.com/michael-simons/configurable-single-user-spring-boot-starter</url>
     <inceptionYear>2017</inceptionYear>
     <organization>
-      <name>michael-simons.eu</name>
-      <url>http://michael-simons.eu</url>
+        <name>michael-simons.eu</name>
+        <url>http://michael-simons.eu</url>
     </organization>
     <licenses>
-      <license>
-        <name>Apache License, Version 2.0</name>
-        <url>http://www.apache.org/licenses/LICENSE-2.0</url>
-      </license>
+        <license>
+            <name>Apache License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0</url>
+        </license>
     </licenses>
 	
     <developers>
-      <developer>
-        <name>Michael J. Simons</name>
-        <email>michael@simons.ac</email>
-      </developer>
+        <developer>
+            <name>Michael J. Simons</name>
+            <email>michael@simons.ac</email>
+        </developer>
     </developers>
 	
     <prerequisites>
-      <maven>3.5.0</maven>
+        <maven>3.5.0</maven>
     </prerequisites>
 	
-	<!--
     <modules>
         <module>configurable-single-user-spring-boot-autoconfigure</module>
         <module>configurable-single-user-spring-boot-starter</module>
         <module>configurable-single-user-spring-boot-demo</module>
     </modules>
-	-->
+    
 	
     <scm>
-      <connection>scm:git:git@github.com:michael-simons/configurable-single-user-spring-boot-starter.git</connection>
-      <developerConnection>scm:git:git@github.com:michael-simons/configurable-single-user-spring-boot-starter.git</developerConnection>
-      <url>https://github.com/michael-simons/configurable-single-user-spring-boot-starter</url>
-      <tag>HEAD</tag>
+        <connection>scm:git:git@github.com:michael-simons/configurable-single-user-spring-boot-starter.git</connection>
+        <developerConnection>scm:git:git@github.com:michael-simons/configurable-single-user-spring-boot-starter.git</developerConnection>
+        <url>https://github.com/michael-simons/configurable-single-user-spring-boot-starter</url>
+        <tag>HEAD</tag>
     </scm>
 
     <properties>
-      <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-      <maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
-      <build-date>${maven.build.timestamp}</build-date>
+        <maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
+        <build-date>${maven.build.timestamp}</build-date>
     </properties>
 
 
