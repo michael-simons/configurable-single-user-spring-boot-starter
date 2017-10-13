@@ -13,7 +13,7 @@
     <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
 
-    <name>configurable-single-user-spring-boot-starter</name>
+    <name>configurable-single-user-spring-boot-parent</name>
     <description>A super simple Spring Boot Starter for Spring Boot 2.0 that brings back the configurable, single user.</description>
     <url>https://github.com/michael-simons/configurable-single-user-spring-boot-starter</url>
     <inceptionYear>2017</inceptionYear>
