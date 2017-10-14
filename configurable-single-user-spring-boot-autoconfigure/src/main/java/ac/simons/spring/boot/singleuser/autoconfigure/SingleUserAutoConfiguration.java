@@ -15,8 +15,10 @@
  */
 package ac.simons.spring.boot.singleuser.autoconfigure;
 
+import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.boot.autoconfigure.security.SecurityAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -36,6 +38,7 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
  */
 @Configuration
 @ConditionalOnClass({AuthenticationManager.class, GlobalAuthenticationConfigurerAdapter.class})
+@AutoConfigureBefore(SecurityAutoConfiguration.class)
 public class SingleUserAutoConfiguration {
 
     @ConditionalOnMissingBean({AuthenticationManager.class, AuthenticationProvider.class, UserDetailsService.class})
