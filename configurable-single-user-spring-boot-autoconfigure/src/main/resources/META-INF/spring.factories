@@ -1,0 +1,2 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration = \
+  ac.simons.spring.boot.singleuser.autoconfigure.SingleUserAutoConfiguration
