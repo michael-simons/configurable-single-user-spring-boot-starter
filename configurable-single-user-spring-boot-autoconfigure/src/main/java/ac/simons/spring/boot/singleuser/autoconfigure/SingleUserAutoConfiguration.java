@@ -15,10 +15,13 @@
  */
 package ac.simons.spring.boot.singleuser.autoconfigure;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.security.SecurityAutoConfiguration;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -39,12 +42,28 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 @Configuration
 @ConditionalOnClass({AuthenticationManager.class, GlobalAuthenticationConfigurerAdapter.class})
 @AutoConfigureBefore(SecurityAutoConfiguration.class)
+@EnableConfigurationProperties(SingleUserProperties.class)
 public class SingleUserAutoConfiguration {
+
+    private static final Log LOG = LogFactory
+            .getLog(SingleUserAutoConfiguration.class);
+
+    private final SingleUserProperties singleUserProperties;
+
+    public SingleUserAutoConfiguration(final SingleUserProperties singleUserProperties) {
+        this.singleUserProperties = singleUserProperties;
+    }
 
     @ConditionalOnMissingBean({AuthenticationManager.class, AuthenticationProvider.class, UserDetailsService.class})
     @Bean
     public InMemoryUserDetailsManager singleUserDetailsMananger() throws Exception {
+        if (singleUserProperties.isDefaultPassword()) {
+            LOG.warn(String.format("%n%nUsing generated password %s for user '%s'!%n", singleUserProperties.getPassword(), singleUserProperties.getName()));
+        }
         return new InMemoryUserDetailsManager(
-                User.withUsername("user").password("foo").roles().build());
+                User.withUsername(singleUserProperties.getName())
+                        .password(singleUserProperties.getPassword())
+                        .roles(singleUserProperties.getRoles().stream().toArray(String[]::new))
+                        .build());
     }
 }
