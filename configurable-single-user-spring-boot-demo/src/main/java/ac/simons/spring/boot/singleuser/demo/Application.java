@@ -15,8 +15,11 @@
  */
 package ac.simons.spring.boot.singleuser.demo;
 
+import java.security.Principal;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * Simple demo application for this starter.
@@ -26,6 +29,14 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class Application {
 
+    @RestController
+    static class HelloWorldController {
+        @RequestMapping("/hello")
+        public String hello(Principal principal) {
+            return "Hello, " + principal.getName() + "\n";
+        }
+    }
+    
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
     }
