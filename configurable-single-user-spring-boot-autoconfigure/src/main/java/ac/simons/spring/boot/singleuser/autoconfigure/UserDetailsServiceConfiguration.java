@@ -22,6 +22,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.security.SecurityAutoConfiguration;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.configurers.GlobalAuthenticationConfigurerAdapter;
@@ -33,6 +34,7 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
  *
  * @author Michael J. Simons, 2017-10-14
  */
+@Configuration
 @ConditionalOnClass({AuthenticationManager.class, GlobalAuthenticationConfigurerAdapter.class})
 @AutoConfigureBefore(SecurityAutoConfiguration.class)
 public class UserDetailsServiceConfiguration {

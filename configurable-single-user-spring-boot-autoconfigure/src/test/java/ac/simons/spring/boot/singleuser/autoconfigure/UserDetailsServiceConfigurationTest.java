@@ -45,7 +45,6 @@ public class UserDetailsServiceConfigurationTest {
                 .withConfiguration(AutoConfigurations.of(SingleUserAutoConfiguration.class))
                 .run(context -> {
                     assertThat(context.getBean(UserDetailsService.class).loadUserByUsername("michael")).isNotNull();
-
                 });
     }
 
