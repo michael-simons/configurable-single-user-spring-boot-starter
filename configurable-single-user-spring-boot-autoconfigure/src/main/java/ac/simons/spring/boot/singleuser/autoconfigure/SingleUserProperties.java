@@ -19,6 +19,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -32,6 +34,9 @@ import org.springframework.util.StringUtils;
  */
 @ConfigurationProperties("singleuser")
 public class SingleUserProperties {
+
+    private static final Log LOG = LogFactory
+            .getLog(SingleUserProperties.class);
 
     /**
      * Name of the single user.
@@ -81,11 +86,15 @@ public class SingleUserProperties {
         this.roles = new ArrayList<>(roles);
     }
 
-    public boolean isDefaultPassword() {
+    boolean isDefaultPassword() {
         return this.defaultPassword;
     }
 
     UserDetails asUser() {
+        if (this.isDefaultPassword()) {
+            LOG.warn(String.format("%n%nUsing generated password %s for user '%s'!%n", this.getPassword(), this.getName()));
+        }
+
         return User.withUsername(this.getName())
                 .password(this.getPassword())
                 .roles(this.getRoles().stream().toArray(String[]::new))

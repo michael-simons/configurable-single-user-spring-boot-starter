@@ -15,8 +15,6 @@
  */
 package ac.simons.spring.boot.singleuser.autoconfigure;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -43,9 +41,6 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 @AutoConfigureBefore(SecurityAutoConfiguration.class)
 public class UserDetailsServiceConfiguration {
 
-    private static final Log LOG = LogFactory
-            .getLog(UserDetailsServiceConfiguration.class);
-
     private final SingleUserProperties singleUserProperties;
 
     public UserDetailsServiceConfiguration(final SingleUserProperties singleUserProperties) {
@@ -54,9 +49,6 @@ public class UserDetailsServiceConfiguration {
 
     @Bean
     public InMemoryUserDetailsManager singleUserDetailsMananger() {
-        if (singleUserProperties.isDefaultPassword()) {
-            LOG.warn(String.format("%n%nUsing generated password %s for user '%s'!%n", singleUserProperties.getPassword(), singleUserProperties.getName()));
-        }
         return new InMemoryUserDetailsManager(this.singleUserProperties.asUser());
     }
 }
