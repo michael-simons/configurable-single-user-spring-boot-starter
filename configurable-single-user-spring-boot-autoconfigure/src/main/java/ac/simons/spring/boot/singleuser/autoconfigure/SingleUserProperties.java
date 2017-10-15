@@ -20,11 +20,13 @@ import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.util.StringUtils;
 
 /**
- * Configuration properties for a single user. Basically copied over from the old
- * Spring Security autoconfiguration.
+ * Configuration properties for a single user. Basically copied over from the
+ * old Spring Security autoconfiguration.
  *
  * @author Michael J. Simons, 2017-10-13
  */
@@ -42,7 +44,8 @@ public class SingleUserProperties {
     private String password = UUID.randomUUID().toString();
 
     /**
-     * Granted roles for the single user. Defaults to a list containing the role <code>USER</code>
+     * Granted roles for the single user. Defaults to a list containing the role
+     * <code>USER</code>
      */
     private List<String> roles = new ArrayList<>(
             Collections.singletonList("USER"));
@@ -80,5 +83,12 @@ public class SingleUserProperties {
 
     public boolean isDefaultPassword() {
         return this.defaultPassword;
+    }
+
+    UserDetails asUser() {
+        return User.withUsername(this.getName())
+                .password(this.getPassword())
+                .roles(this.getRoles().stream().toArray(String[]::new))
+                .build();
     }
 }

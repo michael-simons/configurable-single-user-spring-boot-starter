@@ -60,10 +60,6 @@ public class SingleUserAutoConfiguration {
         if (singleUserProperties.isDefaultPassword()) {
             LOG.warn(String.format("%n%nUsing generated password %s for user '%s'!%n", singleUserProperties.getPassword(), singleUserProperties.getName()));
         }
-        return new InMemoryUserDetailsManager(
-                User.withUsername(singleUserProperties.getName())
-                        .password(singleUserProperties.getPassword())
-                        .roles(singleUserProperties.getRoles().stream().toArray(String[]::new))
-                        .build());
+        return new InMemoryUserDetailsManager(this.singleUserProperties.asUser());
     }
 }
