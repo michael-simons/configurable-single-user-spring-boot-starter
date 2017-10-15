@@ -26,6 +26,7 @@ import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.authentication.TestingAuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.core.userdetails.UserDetailsRepository;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
@@ -45,6 +46,7 @@ public class UserDetailsServiceConfigurationTest {
                 .withConfiguration(AutoConfigurations.of(SingleUserAutoConfiguration.class))
                 .run(context -> {
                     assertThat(context.getBean(UserDetailsService.class).loadUserByUsername("michael")).isNotNull();
+                    assertThat(context).getBean(UserDetailsRepository.class).isNull();
                 });
     }
 

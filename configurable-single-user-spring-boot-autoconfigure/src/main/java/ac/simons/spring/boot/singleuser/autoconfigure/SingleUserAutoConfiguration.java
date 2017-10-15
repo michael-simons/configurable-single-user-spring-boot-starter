@@ -28,7 +28,7 @@ import org.springframework.context.annotation.Import;
  * @author Michael J. Simons, 2017-10-14
  */
 @Configuration
-@Import(UserDetailsServiceConfiguration.class)
+@Import({UserDetailsServiceConfiguration.class, UserDetailsRepositoryConfiguration.class})
 @EnableConfigurationProperties(SingleUserProperties.class)
 public class SingleUserAutoConfiguration {
 }
