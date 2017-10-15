@@ -36,6 +36,7 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
  */
 @Configuration
 @ConditionalOnClass({AuthenticationManager.class, GlobalAuthenticationConfigurerAdapter.class})
+@ConditionalOnMissingBean({AuthenticationManager.class, AuthenticationProvider.class, UserDetailsService.class})
 @AutoConfigureBefore(SecurityAutoConfiguration.class)
 public class UserDetailsServiceConfiguration {
 
@@ -48,7 +49,6 @@ public class UserDetailsServiceConfiguration {
         this.singleUserProperties = singleUserProperties;
     }
 
-    @ConditionalOnMissingBean({AuthenticationManager.class, AuthenticationProvider.class, UserDetailsService.class})
     @Bean
     public InMemoryUserDetailsManager singleUserDetailsMananger() {
         if (singleUserProperties.isDefaultPassword()) {
