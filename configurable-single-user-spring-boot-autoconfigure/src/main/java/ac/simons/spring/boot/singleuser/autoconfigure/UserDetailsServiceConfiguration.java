@@ -50,7 +50,7 @@ public class UserDetailsServiceConfiguration {
 
     @ConditionalOnMissingBean({AuthenticationManager.class, AuthenticationProvider.class, UserDetailsService.class})
     @Bean
-    public InMemoryUserDetailsManager singleUserDetailsMananger() throws Exception {
+    public InMemoryUserDetailsManager singleUserDetailsMananger() {
         if (singleUserProperties.isDefaultPassword()) {
             LOG.warn(String.format("%n%nUsing generated password %s for user '%s'!%n", singleUserProperties.getPassword(), singleUserProperties.getName()));
         }
