@@ -29,7 +29,7 @@ import org.springframework.security.core.userdetails.UserDetailsRepository;
 
 /**
  * Provides the same, configurable single user for reactive security.
- * 
+ *
  * @author Michael J. Simons, 2017-10-14
  */
 @Configuration
@@ -38,14 +38,11 @@ import org.springframework.security.core.userdetails.UserDetailsRepository;
 @ConditionalOnWebApplication(type = Type.REACTIVE)
 @AutoConfigureBefore(ReactiveSecurityAutoConfiguration.class)
 public class UserDetailsRepositoryConfiguration {
-    private final SingleUserProperties singleUserProperties;
-
-    public UserDetailsRepositoryConfiguration(final SingleUserProperties singleUserProperties) {
-        this.singleUserProperties = singleUserProperties;
-    }
 
     @Bean
-    public MapUserDetailsRepository singleUserDetailsRepository() {
+    public MapUserDetailsRepository singleUserDetailsRepository(
+            final SingleUserProperties singleUserProperties
+    ) {
         return new MapUserDetailsRepository(singleUserProperties.asUser());
     }
 }

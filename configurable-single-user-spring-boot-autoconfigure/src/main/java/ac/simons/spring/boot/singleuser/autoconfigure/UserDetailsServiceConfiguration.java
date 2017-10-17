@@ -41,14 +41,10 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 @AutoConfigureBefore(SecurityAutoConfiguration.class)
 public class UserDetailsServiceConfiguration {
 
-    private final SingleUserProperties singleUserProperties;
-
-    public UserDetailsServiceConfiguration(final SingleUserProperties singleUserProperties) {
-        this.singleUserProperties = singleUserProperties;
-    }
-
     @Bean
-    public InMemoryUserDetailsManager singleUserDetailsMananger() {
-        return new InMemoryUserDetailsManager(this.singleUserProperties.asUser());
+    public InMemoryUserDetailsManager singleUserDetailsMananger(
+            final SingleUserProperties singleUserProperties
+    ) {
+        return new InMemoryUserDetailsManager(singleUserProperties.asUser());
     }
 }
