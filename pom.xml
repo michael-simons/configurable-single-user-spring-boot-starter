@@ -75,13 +75,8 @@
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <version>0.7.9</version>
                 <configuration>
-                    <excludes>
-                        <!-- Application starter -->
-                        <exclude>ac/simons/biking2/Application.class</exclude>
-                        <!-- Checked JAXBException while creating contexts -->
-                        <exclude>ac/simons/biking2/misc/JAXBContextFactory.class</exclude>
-                        <!-- Configuration -->
-                        <exclude>ac/simons/biking2/config/*</exclude>
+                    <excludes>                       
+                        <exclude>ac/simons/spring/boot/singleuser/demo/*</exclude>
                     </excludes>
                 </configuration>
                 <executions>
