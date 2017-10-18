@@ -16,6 +16,7 @@
 package ac.simons.spring.boot.singleuser.demo;
 
 import java.security.Principal;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,12 +33,12 @@ public class Application {
     @RestController
     static class HelloWorldController {
         @RequestMapping("/hello")
-        public String hello(Principal principal) {
+        public String hello(final Principal principal) {
             return "Hello, " + principal.getName() + "\n";
         }
     }
-    
-    public static void main(String[] args) {
+
+    public static void main(final String[] args) {
         SpringApplication.run(Application.class, args);
     }
 }

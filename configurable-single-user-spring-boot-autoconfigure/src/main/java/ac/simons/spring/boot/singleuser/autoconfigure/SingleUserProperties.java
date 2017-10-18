@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -33,7 +34,7 @@ import org.springframework.util.StringUtils;
  * @author Michael J. Simons, 2017-10-13
  */
 @ConfigurationProperties("singleuser")
-public class SingleUserProperties {
+public final class SingleUserProperties {
 
     private static final Log LOG = LogFactory
             .getLog(SingleUserProperties.class);
@@ -61,7 +62,7 @@ public class SingleUserProperties {
         return this.name;
     }
 
-    public void setName(String name) {
+    public void setName(final String name) {
         this.name = name;
     }
 
@@ -69,7 +70,7 @@ public class SingleUserProperties {
         return this.password;
     }
 
-    public void setPassword(String password) {
+    public void setPassword(final String password) {
         if (password.startsWith("${") && password.endsWith("}")
                 || !StringUtils.hasLength(password)) {
             return;
@@ -82,7 +83,7 @@ public class SingleUserProperties {
         return this.roles;
     }
 
-    public void setRoles(List<String> roles) {
+    public void setRoles(final List<String> roles) {
         this.roles = new ArrayList<>(roles);
     }
 

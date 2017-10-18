@@ -16,10 +16,12 @@
 package ac.simons.spring.boot.singleuser.demo;
 
 import java.security.Principal;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
 import reactor.core.publisher.Mono;
 
 /**
@@ -33,14 +35,14 @@ public class ReactiveApplication {
     @RestController
     static class HelloWorldController {
         @RequestMapping("/hello")
-        public Mono<String> hello(Mono<Principal> principal) {
+        public Mono<String> hello(final Mono<Principal> principal) {
             return principal
                     .map(Principal::getName)
                     .map(n -> "Hello, " + n + "\n");
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
         SpringApplication.run(ReactiveApplication.class, args);
     }
 }

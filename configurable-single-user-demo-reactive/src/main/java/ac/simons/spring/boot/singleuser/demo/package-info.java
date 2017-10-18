@@ -14,6 +14,6 @@
  * limitations under the License.
  */
 /**
- * A starter that provides a single, configurable user.
+ * Simple, reactive demo application for this starter.
  */
-package ac.simons.spring.boot.singleuser.autoconfigure;
+package ac.simons.spring.boot.singleuser.demo;
