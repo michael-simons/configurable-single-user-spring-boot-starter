@@ -8,7 +8,7 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>configurable-single-user-spring-boot-demo</artifactId>
+    <artifactId>configurable-single-user-demo</artifactId>
     <packaging>jar</packaging>
 	
     <properties>

@@ -42,7 +42,7 @@
     <modules>
         <module>configurable-single-user-spring-boot-autoconfigure</module>
         <module>configurable-single-user-spring-boot-starter</module>
-        <module>configurable-single-user-spring-boot-demo</module>
+        <module>configurable-single-user-demo</module>
         <module>configurable-single-user-demo-reactive</module>
     </modules>
 	
