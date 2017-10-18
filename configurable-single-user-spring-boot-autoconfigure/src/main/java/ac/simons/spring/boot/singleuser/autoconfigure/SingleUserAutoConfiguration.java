@@ -15,9 +15,11 @@
  */
 package ac.simons.spring.boot.singleuser.autoconfigure;
 
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
+import org.springframework.security.core.userdetails.UserDetails;
 
 /**
  * Provides the auto-configuration of one single, user. This configuration is
@@ -28,6 +30,7 @@ import org.springframework.context.annotation.Import;
  * @author Michael J. Simons, 2017-10-14
  */
 @Configuration
+@ConditionalOnClass(UserDetails.class)
 @Import({UserDetailsServiceConfiguration.class, UserDetailsRepositoryConfiguration.class})
 @EnableConfigurationProperties(SingleUserProperties.class)
 public class SingleUserAutoConfiguration {
