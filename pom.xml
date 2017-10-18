@@ -58,9 +58,6 @@
 
         <maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
         <build-date>${maven.build.timestamp}</build-date>
-        
-        <!-- Same exclusions as pure JaCoCo -->
-        <sonar.coverage.exclusions>ac/simons/spring/boot/singleuser/demo/*</sonar.coverage.exclusions>
     </properties>
     
     <dependencies>
