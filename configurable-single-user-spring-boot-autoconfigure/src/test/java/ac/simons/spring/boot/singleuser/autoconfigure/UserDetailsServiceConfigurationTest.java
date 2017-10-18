@@ -31,6 +31,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import org.springframework.boot.autoconfigure.security.SecurityAutoConfiguration;
 
 /**
  * @author Michael J. Simons, 2017-10-14
@@ -43,7 +44,7 @@ public class UserDetailsServiceConfigurationTest {
     public void configuresADefaultUser() {
         contextRunner
                 .withPropertyValues("singleuser.name=michael")
-                .withConfiguration(AutoConfigurations.of(SingleUserAutoConfiguration.class))
+                .withConfiguration(AutoConfigurations.of(SecurityAutoConfiguration.class, SingleUserAutoConfiguration.class))
                 .run(context -> {
                     assertThat(context.getBean(UserDetailsService.class).loadUserByUsername("michael")).isNotNull();
                     assertThat(context).getBean(UserDetailsRepository.class).isNull();
@@ -54,7 +55,7 @@ public class UserDetailsServiceConfigurationTest {
     public void configuresNoDefaultUserWhenAuthenticationManagerPresent() {
         contextRunner
                 .withUserConfiguration(AuthenticationManagerIsPresent.class)
-                .withConfiguration(AutoConfigurations.of(SingleUserAutoConfiguration.class))
+                .withConfiguration(AutoConfigurations.of(SecurityAutoConfiguration.class, SingleUserAutoConfiguration.class))
                 .run(context -> {
                     assertThat(context).getBean("singleUserDetailsMananger").isNull();
                 });
@@ -64,7 +65,7 @@ public class UserDetailsServiceConfigurationTest {
     public void configuresNoDefaultUserWhenAuthenticationProviderPresent() {
         contextRunner
                 .withUserConfiguration(AuthenticationProviderIsPresent.class)
-                .withConfiguration(AutoConfigurations.of(SingleUserAutoConfiguration.class))
+                .withConfiguration(AutoConfigurations.of(SecurityAutoConfiguration.class, SingleUserAutoConfiguration.class))
                 .run(context -> {
                     assertThat(context).getBean("singleUserDetailsMananger").isNull();
                 });
@@ -74,7 +75,7 @@ public class UserDetailsServiceConfigurationTest {
     public void configuresNoDefaultUserWhenUserDetailsServicePresent() {
         contextRunner
                 .withUserConfiguration(UserDetailsServiceIsPresent.class)
-                .withConfiguration(AutoConfigurations.of(SingleUserAutoConfiguration.class))
+                .withConfiguration(AutoConfigurations.of(SecurityAutoConfiguration.class, SingleUserAutoConfiguration.class))
                 .run(context -> {
                     assertThat(context).getBean("singleUserDetailsMananger").isNull();
                 });

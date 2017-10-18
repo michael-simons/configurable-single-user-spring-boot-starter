@@ -34,6 +34,7 @@ import org.springframework.web.reactive.config.EnableWebFlux;
 import org.springframework.web.server.adapter.WebHttpHandlerBuilder;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import org.springframework.boot.autoconfigure.security.reactive.ReactiveSecurityAutoConfiguration;
 
 /**
  * @author Michael J. Simons, 2017-10-14
@@ -49,7 +50,7 @@ public class UserDetailsRepositoryConfigurationTest {
         contextRunner
                 .withUserConfiguration(TestConfig.class)
                 .withPropertyValues("singleuser.name=michael")
-                .withConfiguration(AutoConfigurations.of(SingleUserAutoConfiguration.class))
+                .withConfiguration(AutoConfigurations.of(ReactiveSecurityAutoConfiguration.class, SingleUserAutoConfiguration.class))
                 .run(context -> {
                     assertThat(context.getBean(UserDetailsRepository.class).findByUsername("michael").block()).isNotNull();
                     assertThat(context).getBean(UserDetailsService.class).isNull();
@@ -60,7 +61,7 @@ public class UserDetailsRepositoryConfigurationTest {
     public void configuresNoDefaultUserWhenAuthenticationManagerPresent() {
         contextRunner
                 .withUserConfiguration(TestConfig.class, AuthenticationManagerIsPresent.class)
-                .withConfiguration(AutoConfigurations.of(SingleUserAutoConfiguration.class))
+                .withConfiguration(AutoConfigurations.of(ReactiveSecurityAutoConfiguration.class, SingleUserAutoConfiguration.class))
                 .run(context -> {
                     assertThat(context).getBean("singleUserDetailsRepository").isNull();
                 });
@@ -70,7 +71,7 @@ public class UserDetailsRepositoryConfigurationTest {
     public void configuresNoDefaultUserWhenUserDetailsServicePresent() {
         contextRunner
                 .withUserConfiguration(TestConfig.class, UserDetailsRepositoryIsPresent.class)
-                .withConfiguration(AutoConfigurations.of(SingleUserAutoConfiguration.class))
+                .withConfiguration(AutoConfigurations.of(ReactiveSecurityAutoConfiguration.class, SingleUserAutoConfiguration.class))
                 .run(context -> {
                     assertThat(context.getBean(UserDetailsRepository.class).findByUsername("bob").block()).isNotNull();
                     assertThat(context.getBean(UserDetailsRepository.class).findByUsername("michael").block()).isNull();
