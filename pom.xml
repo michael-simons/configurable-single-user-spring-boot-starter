@@ -43,8 +43,8 @@
         <module>configurable-single-user-spring-boot-autoconfigure</module>
         <module>configurable-single-user-spring-boot-starter</module>
         <module>configurable-single-user-spring-boot-demo</module>
+        <module>configurable-single-user-demo-reactive</module>
     </modules>
-    
 	
     <scm>
         <connection>scm:git:git@github.com:michael-simons/configurable-single-user-spring-boot-starter.git</connection>
