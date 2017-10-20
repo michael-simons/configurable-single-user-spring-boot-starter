@@ -13,6 +13,7 @@
 	
     <properties>
         <start-class>ac.simons.spring.boot.singleuser.demo.ReactiveApplication</start-class>
+        <sonar.skip>true</sonar.skip>
     </properties>
 
     <dependencies>
