@@ -1,5 +1,5 @@
 /*
- * Copyright 2017 michael-simons.eu.
+ * Copyright 2017-2018 michael-simons.eu.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -36,7 +36,7 @@ import reactor.test.StepVerifier;
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = MOCK)
 @AutoConfigureWebTestClient
-@TestPropertySource(properties = {"singleuser.name = peter", "singleuser.password = parker"})
+@TestPropertySource(properties = {"singleuser.name = peter", "singleuser.password = {noop}parker"})
 public class ReactiveApplicationTest {
 
     @Autowired

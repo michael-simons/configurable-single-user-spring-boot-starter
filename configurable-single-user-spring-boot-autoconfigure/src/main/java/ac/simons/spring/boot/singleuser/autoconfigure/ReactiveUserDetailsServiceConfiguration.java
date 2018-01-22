@@ -24,8 +24,8 @@ import org.springframework.boot.autoconfigure.security.reactive.ReactiveSecurity
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.ReactiveAuthenticationManager;
-import org.springframework.security.core.userdetails.MapUserDetailsRepository;
-import org.springframework.security.core.userdetails.UserDetailsRepository;
+import org.springframework.security.core.userdetails.MapReactiveUserDetailsService;
+import org.springframework.security.core.userdetails.ReactiveUserDetailsService;
 
 /**
  * Provides the same, configurable single user for reactive security.
@@ -34,15 +34,15 @@ import org.springframework.security.core.userdetails.UserDetailsRepository;
  */
 @Configuration
 @ConditionalOnClass(ReactiveAuthenticationManager.class)
-@ConditionalOnMissingBean({ReactiveAuthenticationManager.class, UserDetailsRepository.class})
+@ConditionalOnMissingBean({ReactiveAuthenticationManager.class, ReactiveUserDetailsService.class})
 @ConditionalOnWebApplication(type = Type.REACTIVE)
 @AutoConfigureBefore(ReactiveSecurityAutoConfiguration.class)
-public class UserDetailsRepositoryConfiguration {
+public class ReactiveUserDetailsServiceConfiguration {
 
     @Bean
-    public MapUserDetailsRepository singleUserDetailsRepository(
+    public ReactiveUserDetailsService singleUserDetailsService(
             final SingleUserProperties singleUserProperties
     ) {
-        return new MapUserDetailsRepository(singleUserProperties.asUser());
+        return new MapReactiveUserDetailsService(singleUserProperties.asUser());
     }
 }

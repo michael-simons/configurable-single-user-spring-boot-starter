@@ -16,7 +16,9 @@
 package ac.simons.spring.boot.singleuser.autoconfigure;
 
 import java.util.Arrays;
+import java.util.Collection;
 import org.junit.Test;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -56,7 +58,7 @@ public class SingleUserPropertiesTest {
         final UserDetails userDetails = singleUserProperties.asUser();
         assertThat(userDetails.getUsername()).isEqualTo("user");
         assertThat(userDetails.getPassword()).isEqualTo("test");
-        assertThat(userDetails.getAuthorities()).contains(
+        assertThat((Collection<GrantedAuthority>)userDetails.getAuthorities()).contains(
                 new SimpleGrantedAuthority("ROLE_FOO"), 
                 new SimpleGrantedAuthority("ROLE_BAR")
         );

@@ -1,5 +1,5 @@
 /*
- * Copyright 2017 michael-simons.eu.
+ * Copyright 2017-2018 michael-simons.eu.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,8 +26,8 @@ import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.authentication.TestingAuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
-import org.springframework.security.core.userdetails.UserDetailsRepository;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.ReactiveUserDetailsService;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -47,7 +47,7 @@ public class UserDetailsServiceConfigurationTest {
                 .withConfiguration(AutoConfigurations.of(SecurityAutoConfiguration.class, SingleUserAutoConfiguration.class))
                 .run(context -> {
                     assertThat(context.getBean(UserDetailsService.class).loadUserByUsername("michael")).isNotNull();
-                    assertThat(context).getBean(UserDetailsRepository.class).isNull();
+                    assertThat(context).getBean(ReactiveUserDetailsService.class).isNull();
                 });
     }
 

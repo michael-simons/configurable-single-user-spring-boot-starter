@@ -1,5 +1,5 @@
 /*
- * Copyright 2017 michael-simons.eu.
+ * Copyright 2017-2018 michael-simons.eu.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -31,7 +31,7 @@ import org.springframework.security.core.userdetails.UserDetails;
  */
 @Configuration
 @ConditionalOnClass(UserDetails.class)
-@Import({UserDetailsServiceConfiguration.class, UserDetailsRepositoryConfiguration.class})
+@Import({UserDetailsServiceConfiguration.class, ReactiveUserDetailsServiceConfiguration.class})
 @EnableConfigurationProperties(SingleUserProperties.class)
 public class SingleUserAutoConfiguration {
 }

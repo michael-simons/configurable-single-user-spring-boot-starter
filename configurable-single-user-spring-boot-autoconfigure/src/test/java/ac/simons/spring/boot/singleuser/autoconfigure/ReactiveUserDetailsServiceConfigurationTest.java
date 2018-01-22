@@ -1,5 +1,5 @@
 /*
- * Copyright 2017 michael-simons.eu.
+ * Copyright 2017-2018 michael-simons.eu.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,32 +17,32 @@ package ac.simons.spring.boot.singleuser.autoconfigure;
 
 import org.junit.Test;
 import org.springframework.boot.autoconfigure.AutoConfigurations;
-import org.springframework.boot.test.context.runner.ApplicationContextRunner;
 import org.springframework.boot.web.embedded.tomcat.TomcatReactiveWebServerFactory;
-import org.springframework.boot.web.reactive.context.ReactiveWebServerApplicationContext;
 import org.springframework.boot.web.reactive.server.ReactiveWebServerFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.server.reactive.HttpHandler;
 import org.springframework.security.authentication.ReactiveAuthenticationManager;
-import org.springframework.security.core.userdetails.MapUserDetailsRepository;
 import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetailsRepository;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.ReactiveUserDetailsService;
 import org.springframework.web.reactive.config.EnableWebFlux;
 import org.springframework.web.server.adapter.WebHttpHandlerBuilder;
 
 import static org.assertj.core.api.Assertions.assertThat;
+
 import org.springframework.boot.autoconfigure.security.reactive.ReactiveSecurityAutoConfiguration;
+import org.springframework.boot.test.context.runner.ReactiveWebApplicationContextRunner;
+import org.springframework.security.core.userdetails.MapReactiveUserDetailsService;
 
 /**
  * @author Michael J. Simons, 2017-10-14
  */
-public class UserDetailsRepositoryConfigurationTest {
+public class ReactiveUserDetailsServiceConfigurationTest {
 
-    private final ApplicationContextRunner contextRunner
-            = new ApplicationContextRunner(ReactiveWebServerApplicationContext::new);
+    private final ReactiveWebApplicationContextRunner contextRunner
+            = new ReactiveWebApplicationContextRunner();
 
     @Test
     public void configuresADefaultUser() {
@@ -52,7 +52,7 @@ public class UserDetailsRepositoryConfigurationTest {
                 .withPropertyValues("singleuser.name=michael")
                 .withConfiguration(AutoConfigurations.of(ReactiveSecurityAutoConfiguration.class, SingleUserAutoConfiguration.class))
                 .run(context -> {
-                    assertThat(context.getBean(UserDetailsRepository.class).findByUsername("michael").block()).isNotNull();
+                    assertThat(context.getBean(ReactiveUserDetailsService.class).findByUsername("michael").block()).isNotNull();
                     assertThat(context).getBean(UserDetailsService.class).isNull();
                 });
     }
@@ -73,8 +73,8 @@ public class UserDetailsRepositoryConfigurationTest {
                 .withUserConfiguration(TestConfig.class, UserDetailsRepositoryIsPresent.class)
                 .withConfiguration(AutoConfigurations.of(ReactiveSecurityAutoConfiguration.class, SingleUserAutoConfiguration.class))
                 .run(context -> {
-                    assertThat(context.getBean(UserDetailsRepository.class).findByUsername("bob").block()).isNotNull();
-                    assertThat(context.getBean(UserDetailsRepository.class).findByUsername("michael").block()).isNull();
+                    assertThat(context.getBean(ReactiveUserDetailsService.class).findByUsername("bob").block()).isNotNull();
+                    assertThat(context.getBean(ReactiveUserDetailsService.class).findByUsername("michael").block()).isNull();
                     assertThat(context).getBean(UserDetailsService.class).isNull();
                 });
     }
@@ -92,8 +92,8 @@ public class UserDetailsRepositoryConfigurationTest {
     static class UserDetailsRepositoryIsPresent {
 
         @Bean
-        public UserDetailsRepository userDetailsService() {
-            return new MapUserDetailsRepository(User.withUsername("Bob").password("bobby").roles("USER").build());
+        public ReactiveUserDetailsService userDetailsService() {
+            return new MapReactiveUserDetailsService(User.withUsername("Bob").password("bobby").roles("USER").build());
         }
     }
 
