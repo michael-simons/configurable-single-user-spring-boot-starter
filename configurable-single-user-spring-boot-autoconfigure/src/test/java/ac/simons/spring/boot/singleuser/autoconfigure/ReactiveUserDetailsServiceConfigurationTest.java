@@ -17,18 +17,13 @@ package ac.simons.spring.boot.singleuser.autoconfigure;
 
 import org.junit.Test;
 import org.springframework.boot.autoconfigure.AutoConfigurations;
-import org.springframework.boot.web.embedded.tomcat.TomcatReactiveWebServerFactory;
-import org.springframework.boot.web.reactive.server.ReactiveWebServerFactory;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.server.reactive.HttpHandler;
 import org.springframework.security.authentication.ReactiveAuthenticationManager;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.ReactiveUserDetailsService;
 import org.springframework.web.reactive.config.EnableWebFlux;
-import org.springframework.web.server.adapter.WebHttpHandlerBuilder;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -100,16 +95,5 @@ public class ReactiveUserDetailsServiceConfigurationTest {
     @Configuration
     @EnableWebFlux
     static class TestConfig {
-
-        @Bean
-        public HttpHandler httpHandler(ApplicationContext applicationContext) {
-            return WebHttpHandlerBuilder.applicationContext(applicationContext).build();
-        }
-
-        @Bean
-        public ReactiveWebServerFactory reactiveWebServerFactory() {
-            return new TomcatReactiveWebServerFactory();
-        }
-
     }
 }
